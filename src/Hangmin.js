@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Hangmin.css';
 
+const WIN = 'You won! Reload to play again ^ ^';
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz';
 const STATUS = [
   'Weeeew, this is fun!',
@@ -11,6 +12,7 @@ const STATUS = [
   'My goodness.',
   'You\'re so dead now.',
   'YOU\'RE SO DEAD NOW!!!!!',
+  'Sorry, game over :(',
 ];
 
 function Letter(props) {
@@ -58,6 +60,9 @@ class Hangmin extends Component {
   }
 
   handleClick(guess) {
+    if (isWinner(this.state.letters) || this.state.deadness === 7) {
+      return;
+    }
     const guesses = Object.assign({}, this.state.guesses);
     guesses[guess] = false;
 
@@ -102,7 +107,8 @@ class Hangmin extends Component {
     return (
       <div className="Hangmin">
         <p>
-          {STATUS[this.state.deadness]}
+          {isWinner(this.state.letters) ?
+           WIN : STATUS[this.state.deadness]}
         </p>
         <div>
           {letters}
@@ -113,6 +119,16 @@ class Hangmin extends Component {
       </div>
     );
   }
+}
+
+function isWinner(letters) {
+  for (let i=0; i < letters.length; i++) {
+    if (!letters[i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 export default Hangmin;

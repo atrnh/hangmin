@@ -45,24 +45,25 @@ class Hangmin extends Component {
     this.state = {
       deadness: 0,
       letters: Array(this.props.word.length).fill(null),
-
+      // Letters of the word and where they are in the array
       letterIndices: [...this.props.word].reduce((obj, ltr, i) => {
         obj[ltr] = obj[ltr] ? [...obj[ltr], i] : [i];
         return obj;
       }, {}),
-
+      // Available guesses
       guesses: [...ALPHABET].reduce((obj, ltr) => {
         obj[ltr] = true;
         return obj;
       }, {}),
-
     };
   }
 
   handleClick(guess) {
+    // Don't do anything if player has won or lost
     if (isWinner(this.state.letters) || this.state.deadness === 7) {
       return;
     }
+    // Disable guessed letter
     const guesses = Object.assign({}, this.state.guesses);
     guesses[guess] = false;
 
@@ -74,7 +75,7 @@ class Hangmin extends Component {
         letters: letters,
         guesses: guesses,
       });
-    } else {
+    } else { // Guess was incorrect
       const deadness = this.state.deadness + 1;
       this.setState({
         deadness: deadness,

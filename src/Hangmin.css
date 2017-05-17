@@ -1,0 +1,36 @@
+.Letter-square {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  border-bottom: 2px solid black;
+  text-align: center;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.Letter-text {
+  font-size: 60px;
+}
+
+.Guesses {
+  width: 300px;
+  margin: 10px auto;
+}
+
+.Guess-enabled {
+  display: inline-block;
+  color: black;
+  margin: 5px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.Guess-enabled:hover {
+  text-decoration: underline;
+}
+
+.Guess-disabled {
+  display: inline-block;
+  color: #d7d7d7;
+  margin: 5px;
+}
